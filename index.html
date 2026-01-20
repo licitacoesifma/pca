@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Portal Nacional de Compras Públicas - PNCP | IFMA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ifma-green: #1B5E20;
+            --ifma-green-light: #2E7D32;
+            --ifma-green-dark: #0D3B12;
+            --ifma-red: #C62828;
+            --ifma-yellow: #FBC02D;
+            --gov-blue: #071D41;
+            --accent-teal: #00796B;
+            --bg-light: #F8F9FA;
+            --text-dark: #212529;
+            --text-muted: #6C757D;
+        }
+
+        * {
+            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Merriweather', Georgia, serif;
+            font-weight: 700;
+        }
+
+        /* Header */
+        .header-main {
+            background: linear-gradient(135deg, var(--ifma-green-dark) 0%, var(--ifma-green) 50%, var(--ifma-green-light) 100%);
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-main::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-ifma {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-square {
+            display: grid;
+            grid-template-columns: repeat(3, 12px);
+            gap: 3px;
+        }
+
+        .logo-square span {
+            width: 12px;
+            height: 12px;
+            border-radius: 2px;
+        }
+
+        .logo-square span:nth-child(1) { background: var(--ifma-red); }
+        .logo-square span:nth-child(2) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(3) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(4) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(5) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(6) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(7) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(8) { background: var(--ifma-green-light); }
+        .logo-square span:nth-child(9) { background: var(--ifma-green-light); }
+
+        .logo-text {
+            color: white;
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .header-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .badge-dept {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Navigation/TOC */
+        .toc-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            margin-top: -3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .toc-title {
+            color: var(--ifma-green);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .toc-list li a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .toc-list li a:hover {
+            background: white;
+            border-color: var(--ifma-green);
+            transform: translateX(5px);
+        }
+
+        .toc-number {
+            width: 28px;
+            height: 28px;
+            background: var(--ifma-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        /* Content sections */
+        .content-section {
+            background: white;
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--ifma-green);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--ifma-green) 0%, var(--ifma-green-light) 100%);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(27, 94, 32, 0.3);
+        }
+
+        .section-title {
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .section-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 0.25rem;
+        }
+
+        /* Image placeholder */
+        .img-placeholder {
+            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
+            border: 2px dashed var(--ifma-green-light);
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .img-placeholder i {
+            font-size: 3rem;
+            color: var(--ifma-green);
+            margin-bottom: 1rem;
+        }
+
+        .img-placeholder p {
+            color: var(--ifma-green-dark);
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* Instructions list */
+        .instruction-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+
+        .instruction-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .instruction-list li:hover {
+            background: #E8F5E9;
+        }
+
+        .instruction-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border: 2px solid var(--ifma-green);
+            color: var(--ifma-green);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .instruction-text {
+            flex: 1;
+        }
+
+        .instruction-text strong {
+            color: var(--ifma-green-dark);
+        }
+
+        /* Alert boxes */
+        .alert-custom {
+            border: none;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .alert-tip {
+            background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 100%);
+            color: #0D47A1;
+        }
+
+        .alert-warning {
+            background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%);
+            color: #E65100;
+        }
+
+        .alert-important {
+            background: linear-gradient(135deg, #FCE4EC 0%, #F8BBD9 100%);
+            color: #880E4F;
+        }
+
+        .alert-custom i {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        /* Info cards */
+        .info-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            height: 100%;
+        }
+
+        .info-card-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--ifma-green);
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .info-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin: 0;
+        }
+
+        /* Video section */
+        .video-section {
+            background: linear-gradient(135deg, var(--gov-blue) 0%, #1A237E 100%);
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .video-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .video-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .video-section:hover .video-icon {
+            transform: scale(1.1);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .video-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .video-section p {
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .btn-video {
+            background: white;
+            color: var(--gov-blue);
+            padding: 0.875rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-video:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+            color: var(--gov-blue);
+        }
+
+        /* Contact section */
+        .contact-section {
+            background: white;
+            border-radius: 16px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .contact-title {
+            color: var(--ifma-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .contact-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-card {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: #E8F5E9;
+            transform: translateY(-4px);
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: var(--ifma-green);
+            margin-bottom: 1rem;
+        }
+
+        .contact-card a {
+            color: var(--ifma-green-dark);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--ifma-green-dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-logo {
+            opacity: 0.9;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .footer p {
+            margin: 0;
+            opacity: 0.8;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .toc-section {
+                padding: 1.5rem;
+            }
+
+            .video-section {
+                padding: 2rem 1.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .header-main {
+                background: var(--ifma-green) !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            .content-section {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: var(--ifma-green);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(27, 94, 32, 0.4);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-4px);
+            background: var(--ifma-green-light);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-main">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-ifma">
+                    <div class="logo-square">
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="logo-text">
+                        INSTITUTO<br>FEDERAL<br>Maranhão
+                    </div>
+                </div>
+                <h1 class="header-title">Manual do Portal Nacional de Compras Públicas</h1>
+                <p class="header-subtitle">Guia prático para consulta do Plano de Contratações Anual (PCA) no PNCP</p>
+                <span class="badge-dept">
+                    <i class="bi bi-building me-2"></i>
+                    CLC/DLC/PROAD
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container py-4">
+        <!-- Table of Contents -->
+        <section class="toc-section mb-5">
+            <h2 class="toc-title">
+                <i class="bi bi-list-columns-reverse"></i>
+                Sumário
+            </h2>
+            <ul class="toc-list">
+                <li><a href="#step1"><span class="toc-number">1</span> Acessar o PNCP</a></li>
+                <li><a href="#step2"><span class="toc-number">2</span> Buscar pelo IFMA</a></li>
+                <li><a href="#step3"><span class="toc-number">3</span> Selecionar o PCA</a></li>
+                <li><a href="#step4"><span class="toc-number">4</span> Visualizar os Campi</a></li>
+                <li><a href="#step5"><span class="toc-number">5</span> Localizar a Reitoria</a></li>
+                <li><a href="#step6"><span class="toc-number">6</span> Filtrar por Tipo de Objeto</a></li>
+                <li><a href="#step7"><span class="toc-number">7</span> Obter Informações do TR</a></li>
+               <!-- <li><a href="#video"><span class="toc-number"><i class="bi bi-play-fill"></i></span> Vídeo Explicativo</a></li> -->
+            </ul>
+        </section>
+
+        <!-- Introduction -->
+        <section class="content-section">
+            <div class="section-header">
+                <div class="step-number"><i class="bi bi-info-lg"></i></div>
+                <div>
+                    <h2 class="section-title">Introdução</h2>
+                    <p class="section-description">O que é o PNCP e sua importância</p>
+                </div>
+            </div>
+            
+            <p>O <strong>Portal Nacional de Contratações Públicas (PNCP)</strong> é o sítio eletrônico oficial destinado à divulgação centralizada e obrigatória dos atos exigidos em sede de licitações e contratos administrativos, conforme estabelecido pela <strong>Lei nº 14.133/2021</strong>.</p>
+            
+            <div class="row g-4 mt-3">
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="bi bi-calendar-check"></i></div>
+                        <h4>Plano de Contratações Anual</h4>
+                        <p>Consulte as compras planejadas pelos órgãos para o ano seguinte.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="bi bi-file-earmark-text"></i></div>
+                        <h4>Contratações</h4>
+                        <p>Pesquise editais, atas de registro de preços, contratos e documentos.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="bi bi-bar-chart-line"></i></div>
+                        <h4>Painel em Números</h4>
+                        <p>Visualize estatísticas das contratações públicas de todos os entes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="bi bi-database"></i></div>
+                        <h4>Dados Abertos</h4>
+                        <p>Acesse APIs e documentação para integração de sistemas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 1 -->
+        <section id="step1" class="content-section">
+            <div class="section-header">
+                <div class="step-number">1</div>
+                <div>
+                    <h2 class="section-title">Acessar a Tela Principal do PNCP</h2>
+                    <p class="section-description">Navegue até o portal e selecione o Plano de Contratações Anual</p>
+                </div>
+            </div>
+
+            <ul class="instruction-list">
+                <li>
+                    <span class="instruction-icon"><i class="bi bi-globe"></i></span>
+                    <div class="instruction-text">
+                        Acesse o portal através do endereço: <strong><a href="https://www.gov.br/pncp/pt-br" target="_blank">www.gov.br/pncp/pt-br</a></strong>
+                    </div>
+                </li>
+                <li>
+                    <span class="instruction-icon"><i class="bi bi-hand-index"></i></span>
+                    <div class="instruction-text">
+                        Na seção <strong>"CONSULTE OS DADOS DAS CONTRATAÇÕES PÚBLICAS"</strong>, clique no card <strong>"Plano de Contratações Anual - PCA"</strong>
+                    </div>
+                </li>
+            </ul>
+
+           <div class="img-placeholder text-center">
+            <br>
+    <br>
+    <img src="0tela.png" class="img-fluid mb-2" alt="Tela principal do PNCP com destaque no card PCA">
+    <p class="text-muted">Tela principal do PNCP com destaque no card "Plano de Contratações Anual - PCA".</p>
+</div>
+
+            <div class="alert-custom alert-tip">
+                <i class="bi bi-lightbulb"></i>
+                <div>
+                    <strong>Dica:</strong> O PCA permite consultar as compras planejadas pelos órgãos para o ano seguinte, sendo fundamental para o planejamento das contratações.
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section id="step2" class="content-section">
+            <div class="section-header">
+                <div class="step-number">2</div>
+                <div>
+                    <h2 class="section-title">Buscar pelo IFMA</h2>
+                    <p class="section-description">Pesquise o Instituto Federal do Maranhão no sistema</p>
+                </div>
+            </div>
+
+            <ul class="instruction-list">
+                <li>
+                    <span class="instruction-icon">1</span>
+                    <div class="instruction-text">
+                        No campo <strong>"Palavra-chave"</strong>, digite: <code style="background: #E8F5E9; padding: 0.25rem 0.5rem; border-radius: 4px; color: var(--ifma-green-dark);">IFMA</code>
+                    </div>
+                </li>
+                <li>
+                    <span class="instruction-icon">2</span>
+                    <div class="instruction-text">
+                        Clique no botão <strong>"Pesquisar"</strong> para realizar a busca
+                    </div>
+                </li>
+            </ul>
+
+            <div class="img-placeholder">
+    <img src="1tela.png" class="img-fluid" alt="Tela de busca com campo Palavra-chave preenchido com IFMA" style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+    <p>Tela de busca com o campo "Palavra-chave" preenchido com "IFMA".</p>
+</div>
+
+            <div class="alert-custom alert-tip">
+                <i class="bi bi-funnel"></i>
+                <div>
+                    <strong>Filtros disponíveis:</strong> Você pode refinar sua busca utilizando os filtros por Ano, Órgãos, Esferas e Poderes.
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section id="step3" class="content-section">
+            <div class="section-header">
+                <div class="step-number">3</div>
+                <div>
+                    <h2 class="section-title">Selecionar o PCA por Ano</h2>
+                    <p class="section-description">Escolha o Plano de Contratações Anual desejado</p>
+                </div>
+            </div>
+
+            <p>Após a pesquisa, serão listados os PCAs do IFMA organizados por ano. Você verá informações como:</p>
+
+            <div class="row g-3 my-3">
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <i class="bi bi-calendar3 text-success fs-2 mb-2"></i>
+                        <h4>Ano do PCA</h4>
+                        <p>Ex: PCA 2025, PCA 2024</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <i class="bi bi-clock-history text-success fs-2 mb-2"></i>
+                        <h4>Última Atualização</h4>
+                        <p>Data da última modificação</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-card text-center">
+                        <i class="bi bi-currency-dollar text-success fs-2 mb-2"></i>
+                        <h4>Valor Estimado</h4>
+                        <p>Total previsto para contratações</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="img-placeholder">
+    <img src="2tela.png" class="img-fluid" alt="Lista de PCAs do IFMA para seleção de ano" style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+    
+    <p>Lista de PCAs do IFMA com destaque para selecionar o ano desejado.</p>
+</div>
+
+            <ul class="instruction-list">
+                <li>
+                    <span class="instruction-icon"><i class="bi bi-hand-index"></i></span>
+                    <div class="instruction-text">
+                        <strong>Clique no PCA correspondente ao ano</strong> que deseja consultar para visualizar os detalhes
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Step 4 -->
+        <section id="step4" class="content-section">
+            <div class="section-header">
+                <div class="step-number">4</div>
+                <div>
+                    <h2 class="section-title">Visualizar os Campi do IFMA</h2>
+                    <p class="section-description">Identifique todas as unidades e seus respectivos planos</p>
+                </div>
+            </div>
+
+            <p>A tela apresentará as informações gerais do PCA e a lista de todas as unidades (campi) do IFMA:</p>
+
+            <div class="row g-4 my-3">
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h4><i class="bi bi-info-circle text-success me-2"></i>Informações Solicitadas no Termo de Referência</h4>
+                        <ul class="mt-2 mb-0" style="padding-left: 1.25rem;">
+                            <li>I) ID PCA no PNCP</li>
+                            <li>II) Data de publicação no PNCP</li>
+                            <li>III) Id do item no PCA</li>
+                            <li>IV) Classe/Grupo</li>
+                            <li>V) Identificador da Futura Contratação</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="info-card">
+                        <h4><i class="bi bi-bar-chart text-success me-2"></i>Gráfico por Categoria</h4>
+                        <ul class="mt-2 mb-0" style="padding-left: 1.25rem;">
+                            <li>Material</li>
+                            <li>Serviço</li>
+                            <li>Soluções de TIC</li>
+                            <li>Obras e Serviços de Engenharia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             <div class="img-placeholder">
+    <img src="3tela.png" class="img-fluid" alt="Tela com campi do IFMA e gráfico de valor estimado" style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+    <p>Tela apresentando os campi do IFMA com gráfico de valor estimado por categoria.</p>
+</div>
+
+
+            <div class="alert-custom alert-tip">
+    <i class="bi bi-download"></i>
+    <div>
+        <strong>Download disponível:</strong> Utilize o botão "Baixar arquivo" para obter a relação completa de itens dos planos em formato CSV.
+        
+        <div style="margin-top: 10px;">
+            <a href="relacao_itens.csv" class="btn btn-primary btn-sm" download="relacao_itens.csv">
+                <i class="bi bi-file-earmark-arrow-down"></i> Baixar arquivo
+            </a>
+        </div>
+        </div>
+</div>
+
+        <!-- Step 5 -->
+       <section id="step5" class="content-section">
+    <div class="section-header">
+        <div class="step-number">5</div>
+        <div>
+            <h2 class="section-title">Localizar a Reitoria do IFMA</h2>
+            <p class="section-description">Encontre a unidade UASG 158128</p>
+        </div>
+    </div>
+
+    <div class="img-placeholder">
+        <img src="5tela.png" class="img-fluid" alt="Resultado da busca mostrando a Reitoria do IFMA (UASG 158128)" style="max-width: 100%; height: auto;">
+        <br>
+    <br>
+        <p>Resultado da busca destacando a Reitoria do IFMA (UASG 158128).</p>
+    </div>
+    </section>
+
+            <div class="alert-custom alert-important mb-4">
+                <i class="bi bi-exclamation-triangle"></i>
+                <div>
+                    <strong>Atenção:</strong> Para consultar os itens da Reitoria, procure pela unidade com código <strong>UASG 158128</strong> – "INST.FED.DE EDUC., CIENCIA E TEC. DO MARANHÃO"
+                </div>
+            </div>
+
+            <ul class="instruction-list">
+                <li>
+                    <span class="instruction-icon"><i class="bi bi-search"></i></span>
+                    <div class="instruction-text">
+                        Na tabela "Planos das Unidades", localize a linha correspondente à <strong>UASG 158128</strong>
+                    </div>
+                </li>
+                <li>
+                    <span class="instruction-icon"><i class="bi bi-eye"></i></span>
+                    <div class="instruction-text">
+                        Clique no ícone de <strong>visualização</strong> (olho) na coluna "Detalhar" para acessar os itens do plano
+                    </div>
+                </li>
+            </ul>
+
+            <div class="img-placeholder">
+    <img src="6tela.png" class="img-fluid" alt="Lista de unidades destacando a Reitoria UASG 158128" style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+    <p>Lista de unidades com destaque na linha da Reitoria (UASG 158128).</p>
+</div>
+        </section>
+
+        <!-- Step 6 -->
+        <section id="step6" class="content-section">
+            <div class="section-header">
+                <div class="step-number">6</div>
+                <div>
+                    <h2 class="section-title">Filtrar por Tipo de Objeto</h2>
+                    <p class="section-description">Selecione a categoria conforme identificado no DFD</p>
+                </div>
+            </div>
+
+            <p>Na tela de detalhamento, você encontrará os itens organizados por categoria. Selecione a categoria correspondente ao tipo de objeto identificado no <strong>Documento de Formalização de Demanda (DFD)</strong>:</p>
+
+            <div class="row g-3 my-4">
+                <div class="col-6 col-md-3">
+                    <div class="info-card text-center py-4">
+                        <i class="bi bi-box-seam text-success fs-1 mb-2"></i>
+                        <h4 class="h6 mb-0">Material</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="info-card text-center py-4">
+                        <i class="bi bi-gear text-success fs-1 mb-2"></i>
+                        <h4 class="h6 mb-0">Serviço</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="info-card text-center py-4">
+                        <i class="bi bi-pc-display text-success fs-1 mb-2"></i>
+                        <h4 class="h6 mb-0">Soluções de TIC</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="info-card text-center py-4">
+                        <i class="bi bi-bricks text-success fs-1 mb-2"></i>
+                        <h4 class="h6 mb-0">Obras e Engenharia</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="img-placeholder">
+    <img src="7tela.png" class="img-fluid" alt="Tela mostrando a seção Detalhamento por Categoria e seus filtros" style="max-width: 100%; height: auto;">
+    <br>
+    <br>
+    <p>Seção "Detalhamento por Categoria" com as opções de filtro disponíveis.</p>
+</div>
+        </section>
+
+        <!-- Step 7 -->
+        <section id="step7" class="content-section">
+            <div class="section-header">
+                <div class="step-number">7</div>
+                <div>
+                    <h2 class="section-title">Obter Informações para o Termo de Referência</h2>
+                    <p class="section-description">Localize os dados necessários para instrução processual</p>
+                </div>
+            </div>
+
+            <p>Ao selecionar a categoria, será exibida a tabela com os itens do PCA. As informações essenciais para o <strong>Termo de Referência</strong> são:</p>
+
+            <div class="table-responsive my-4">
+                <table class="table table-bordered" style="background: white;">
+                    <thead style="background: var(--ifma-green); color: white;">
+                        <tr>
+                            <th>Campo</th>
+                            <th>Descrição</th>
+                            <th>Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>I) ID PCA no PNCP</strong></td>
+                            <td>Identificador do PCA</td>
+                            <td>10735145000194-0-000006/2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>II) Data de publicação no PNCP</strong></td>
+                            <td>Data que o PNCP foi publicado</td>
+                            <td>14/05/2024</td>
+                        </tr>
+                        <tr>
+                            <td><strong>III) Id do item no PCA</strong></td>
+                            <td>Número sequencial do item</td>
+                            <td>60</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IV) Classe/Grupo</strong></td>
+                            <td>Classe/grupo que o item pertence</td>
+                            <td>7510-ARTIGOS PARA ESCRITÓRIO</td>
+                        </tr>
+                        <tr>
+                            <td><strong>V) Identificador da Futura Contratação</strong></td>
+                            <td>ID único que vincula o objeto à contratação</td>
+                            <td>158128-33/2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="img-placeholder">
+    <img src="8tela.png" class="img-fluid" alt="Tabela de itens do PCA destacando as colunas para o TR" style="max-width: 100%; height: auto;">
+    
+    <br>
+    <br>
+    <p>Tabela de itens do PCA com destaque nas colunas relevantes para o TR.</p>
+
+</div>
+
+            <div class="alert-custom alert-warning">
+                <i class="bi bi-clipboard-check"></i>
+                <div>
+                    <strong>Importante:</strong> Antes de elaborar o Termo de Referência, certifique-se de que as informações do DFD estejam vinculadas a um id de contratação. Para isso, o DFD precisa ser aprovado pelo DLC/PROAD, logo depois será gerado um id de contratação, que aparecerá no PNCP após aprovação da autoridade superior.
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DO VIDEO EXPLICATIVO
+        <section id="video" class="video-section mb-5">
+            <div class="video-content">
+                <div class="video-icon">
+                    <i class="bi bi-play-fill"></i>
+                </div>
+                <h3>Vídeo Explicativo</h3>
+                <p>Assista ao webinar completo sobre o PNCP na prática</p>
+                <a href="https://www.youtube.com/@MPStreaming/playlists" class="btn-video" target="_blank">
+                    <i class="bi bi-youtube"></i>
+                    Assistir Webinar PNCP na Prática
+                </a>
+            </div>
+        </section>
+-->
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <h2 class="contact-title">Dúvidas?</h2>
+            <p class="contact-subtitle">Entre em contato com a coordenação de Licitações - CLC/PROAD</p>
+            
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <i class="bi bi-envelope"></i>
+                    <p class="mb-1">Diego Lima</p>
+                    <a href="mailto:diego.lima@ifma.edu.br">diego.lima@ifma.edu.br</a>
+                </div>
+                <div class="contact-card">
+                    <i class="bi bi-envelope"></i>
+                    <p class="mb-1">Kristiano Plácido</p>
+                    <a href="mailto:kristiano.placido@ifma.edu.br">kristiano.placido@ifma.edu.br</a>
+                </div>
+                <div class="contact-card">
+                    <i class="bi bi-envelope"></i>
+                    <p class="mb-1">Paulo Administrador</p>
+                    <a href="mailto:pauloadm@ifma.edu.br">pauloadm@ifma.edu.br</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-logos">
+                <div class="footer-logo">
+                    <i class="bi bi-building me-2"></i>
+                    Instituto Federal do Maranhão
+                </div>
+                <div class="footer-logo">
+                    <i class="bi bi-flag me-2"></i>
+                    Governo Federal
+                </div>
+            </div>
+            <p>Reitoria - Instituto Federal do Maranhão</p>
+            <p class="mt-2"><small>Manual elaborado pela coordenadoria de licitaçãoes -CLC/PROAD</small></p>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" title="Voltar ao topo">
+        <i class="bi bi-chevron-up"></i>
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

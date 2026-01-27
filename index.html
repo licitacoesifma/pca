@@ -551,6 +551,279 @@
                 page-break-inside: avoid;
             }
         }
+        /* Gantt Chart - Cronograma PCA */
+        .gantt-wrapper {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(27, 94, 32, 0.08);
+            overflow: hidden;
+        }
+
+        .gantt-title-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .gantt-title-header h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        .gantt-title-header p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin: 0.25rem 0 0 0;
+        }
+
+        .gantt-container {
+            overflow-x: auto;
+        }
+
+        .gantt-inner {
+            min-width: 850px;
+        }
+
+        .gantt-header {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-bottom: 2px solid #e9ecef;
+            background-color: #f8f9fa;
+        }
+
+        .gantt-header-title {
+            padding: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            border-right: 1px solid #e9ecef;
+            background: white;
+            font-size: 0.9rem;
+        }
+
+        .gantt-months {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6c757d;
+        }
+
+        .month-col {
+            padding: 1rem 0;
+            border-left: 1px solid #dee2e6;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .gantt-body {
+            position: relative;
+        }
+
+        /* Linhas de grade verticais */
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 220px;
+            right: 0;
+            bottom: 0;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .grid-line {
+            border-left: 1px dashed #e9ecef;
+            height: 100%;
+        }
+
+        /* Linhas de Tarefas */
+        .gantt-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            border-bottom: 1px solid #f1f3f5;
+            transition: background-color 0.2s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gantt-row:hover {
+            background-color: #f8f9fa;
+        }
+
+        .gantt-row:last-child {
+            border-bottom: none;
+        }
+
+        .task-info {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            border-right: 1px solid #e9ecef;
+            background: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .task-info .task-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 0.15rem;
+        }
+
+        .task-info .task-responsible {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .task-timeline {
+            position: relative;
+            height: 65px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Barras de Progresso */
+        .gantt-bar {
+            position: absolute;
+            height: 26px;
+            border-radius: 13px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 12px;
+            z-index: 5;
+        }
+
+        .gantt-bar:hover {
+            transform: scaleY(1.15);
+            filter: brightness(1.05);
+            z-index: 10;
+        }
+
+        /* Marcos (Diamantes) para datas únicas */
+        .gantt-milestone-wrapper {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gantt-milestone {
+            width: 18px;
+            height: 18px;
+            transform: rotate(45deg);
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+            z-index: 6;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .gantt-milestone:hover {
+            transform: rotate(45deg) scale(1.2);
+        }
+
+        .milestone-line {
+            position: absolute;
+            top: 15%;
+            bottom: 15%;
+            width: 2px;
+            opacity: 0.3;
+        }
+
+        /* Tooltip */
+        .gantt-tooltip {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-dark);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+            display: none;
+            margin-bottom: 8px;
+            z-index: 100;
+        }
+
+        .gantt-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--text-dark);
+        }
+
+        .gantt-bar:hover .gantt-tooltip,
+        .gantt-milestone-wrapper:hover .gantt-tooltip {
+            display: block;
+        }
+
+        /* Cores das Fases */
+        .bg-planejamento { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); }
+        .bg-consolidacao { background: linear-gradient(135deg, #6f42c1 0%, #59359a 100%); }
+        .bg-aprovacao { background: linear-gradient(135deg, #198754 0%, #146c43 100%); }
+        .bg-publicacao { background: linear-gradient(135deg, #fd7e14 0%, #dc6a10 100%); }
+        .bg-gestao { background: linear-gradient(135deg, #dc3545 0%, #bb2d3b 100%); }
+
+        /* Legenda do Gantt */
+        .gantt-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 1.25rem 2rem;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+            justify-content: center;
+        }
+
+        .gantt-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .gantt-legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .gantt-inner {
+                min-width: 800px;
+            }
+            
+            .task-info {
+                position: sticky;
+                left: 0;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            }
+        }
 
         /* Smooth scroll */
         html {
@@ -623,16 +896,80 @@
                 Sumário
             </h2>
             <ul class="toc-list">
-                <li><a href="#step1"><span class="toc-number">1</span> Acessar o PNCP</a></li>
-                <li><a href="#step2"><span class="toc-number">2</span> Buscar pelo IFMA</a></li>
-                <li><a href="#step3"><span class="toc-number">3</span> Selecionar o PCA</a></li>
-                <li><a href="#step4"><span class="toc-number">4</span> Visualizar os Campi</a></li>
-                <li><a href="#step5"><span class="toc-number">5</span> Localizar a Reitoria</a></li>
-                <li><a href="#step6"><span class="toc-number">6</span> Filtrar por Tipo de Objeto</a></li>
-                <li><a href="#step7"><span class="toc-number">7</span> Obter Informações do TR</a></li>
+                <li><a href="#step0"><span class="toc-number">1</span> Cronograma</a></li>
+                <li><a href="#step1"><span class="toc-number">2</span> Acessar o PNCP</a></li>
+                <li><a href="#step2"><span class="toc-number">3</span> Buscar pelo IFMA</a></li>
+                <li><a href="#step3"><span class="toc-number">4</span> Selecionar o PCA</a></li>
+                <li><a href="#step4"><span class="toc-number">5</span> Visualizar os Campi</a></li>
+                <li><a href="#step5"><span class="toc-number">6</span> Localizar a Reitoria</a></li>
+                <li><a href="#step6"><span class="toc-number">7</span> Filtrar por Tipo de Objeto</a></li>
+                <li><a href="#step7"><span class="toc-number">8</span> Obter Informações do Termo de Referência</a></li>
                <!-- <li><a href="#video"><span class="toc-number"><i class="bi bi-play-fill"></i></span> Vídeo Explicativo</a></li> -->
             </ul>
         </section>
+
+        <!-- Cronograma -->
+        <section  id="step0" class="content-section">
+            <div class="section-header">
+                <div class="step-number"><i class="bi bi-clock"></i></div>
+                <div>
+                    <h2 class="section-title">Cronograma</h2>
+                    <p class="section-description">Resumo dos prazos do ano de elaboração do PCA e respectivos responsáveis, segundo o Decreto nº 10.947, de 2022.</p>
+                </div>
+            </div>
+            <div class="gantt-wrapper mt-5">
+                <div class="gantt-title-header">
+                    <h4><i class="bi bi-bar-chart-steps me-2"></i>Cronograma do PCA 2027</h4>
+                    <p>Visualização temporal da execução do Plano de Contratações Anual</p>
+                </div>
+
+                <div class="gantt-container">
+                    <div class="gantt-inner">
+                        <!-- Cabeçalho (Meses) -->
+                        <div class="gantt-header">
+                            <div class="gantt-header-title">
+                                Etapas / Atividades
+                            </div>
+                            <div class="gantt-months">
+                                <div class="month-col">Jan</div>
+                                <div class="month-col">Fev</div>
+                                <div class="month-col">Mar</div>
+                                <div class="month-col">Abr</div>
+                                <div class="month-col">Mai</div>
+                                <div class="month-col">Jun</div>
+                                <div class="month-col">Jul</div>
+                                <div class="month-col">Ago</div>
+                                <div class="month-col">Set</div>
+                                <div class="month-col">Out</div>
+                                <div class="month-col">Nov</div>
+                                <div class="month-col">Dez</div>
+                            </div>
+                        </div>
+
+                        <!-- Corpo do Gantt -->
+                        <div class="gantt-body" id="ganttRows">
+                            <!-- Linhas de grade de fundo -->
+                            <div class="grid-lines">
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                                <div class="grid-line"></div>
+                            </div>
+                            <!-- Linhas geradas via JS -->
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+
 
         <!-- Introduction -->
         <section class="content-section">
@@ -861,7 +1198,7 @@
             <div class="alert-custom alert-tip">
     <i class="bi bi-download"></i>
     <div>
-        <strong>Download disponível:</strong> Utilize o botão "Baixar arquivo" para obter a relação completa do Plano de Contratação Anual 2025 do IFMA/REITORIA em formato CSV.
+        <strong>Download disponível:</strong> Utilize o botão "Baixar arquivo" para obter a relação completa de itens dos planos em formato CSV.
         
         <div style="margin-top: 10px;">
             <a href="relacao_itens.csv" class="btn btn-primary btn-sm" download="relacao_itens.csv">
@@ -1034,42 +1371,23 @@
             </div>
         </section>
 
-        <!-- SEÇÃO DO VIDEO EXPLICATIVO
-        <section id="video" class="video-section mb-5">
-            <div class="video-content">
-                <div class="video-icon">
-                    <i class="bi bi-play-fill"></i>
-                </div>
-                <h3>Vídeo Explicativo</h3>
-                <p>Assista ao webinar completo sobre o PNCP na prática</p>
-                <a href="https://www.youtube.com/@MPStreaming/playlists" class="btn-video" target="_blank">
-                    <i class="bi bi-youtube"></i>
-                    Assistir Webinar PNCP na Prática
-                </a>
-            </div>
-        </section>
--->
-        <!-- Contact Section -->
+      <!-- Contact Section -->
         <section class="contact-section">
             <h2 class="contact-title">Dúvidas?</h2>
-            <p class="contact-subtitle">Entre em contato com a coordenação de Licitações - CLC/PROAD</p>
+            <p class="contact-subtitle">Entre em contato com a Coordenação de Licitações e Compras - CLC/PROAD</p>
             
             <div class="contact-cards">
                 <div class="contact-card">
                     <i class="bi bi-envelope"></i>
-                    <p class="mb-1">Diego Lima</p>
-                    <a href="mailto:diego.lima@ifma.edu.br">diego.lima@ifma.edu.br</a>
+                    <p class="mb-1">Coordenação de Licitações e Compras - CLC/PROAD</p>
+                    <a href="mailto:Licitacoes@ifma.edu.br">Licitacoes@ifma.edu.br</a>
                 </div>
                 <div class="contact-card">
-                    <i class="bi bi-envelope"></i>
-                    <p class="mb-1">Kristiano Plácido</p>
-                    <a href="mailto:kristiano.placido@ifma.edu.br">kristiano.placido@ifma.edu.br</a>
+                    <i class="bi bi-telephone"></i>
+                    <p class="mb-1">Telefone de contato</p>
+                    (98) 3215-1701
                 </div>
-                <div class="contact-card">
-                    <i class="bi bi-envelope"></i>
-                    <p class="mb-1">Paulo Administrador</p>
-                    <a href="mailto:pauloadm@ifma.edu.br">pauloadm@ifma.edu.br</a>
-                </div>
+                
             </div>
         </section>
     </main>
@@ -1080,15 +1398,11 @@
             <div class="footer-logos">
                 <div class="footer-logo">
                     <i class="bi bi-building me-2"></i>
-                    Instituto Federal do Maranhão
+                    Instituto Federal do Maranhão - REITORIA
                 </div>
-                <div class="footer-logo">
-                    <i class="bi bi-flag me-2"></i>
-                    Governo Federal
-                </div>
+                
             </div>
-            <p>Reitoria - Instituto Federal do Maranhão</p>
-            <p class="mt-2"><small>Manual elaborado pela coordenadoria de licitaçãoes -CLC/PROAD</small></p>
+            <p class="mt-2"><small>Manual elaborado pela Coordenadoria de Licitaçãoes e Compras - CLC/PROAD</small></p>
         </div>
     </footer>
 
@@ -1116,6 +1430,119 @@
                 behavior: 'smooth'
             });
         });
+
+        // ========== CRONOGRAMA PCA - GANTT CHART ==========
+const ganttTasks = [
+    {
+        title: "Envio do DFD",
+        responsible: "Áreas Técnicas",
+        type: "bar",
+        colorClass: "bg-planejamento",
+        startMonth: 0,
+        duration: 3,
+        label: "01/Jan - 01/Abr"
+    },
+    {
+        title: "Consolidação",
+        responsible: "Setor de Contratações",
+        type: "bar",
+        colorClass: "bg-consolidacao",
+        startMonth: 0,
+        duration: 4,
+        label: "01/Jan - 30/Abr"
+    },
+    {
+        title: "Aprovação",
+        responsible: "Aut. Competente",
+        type: "milestone",
+        colorClass: "bg-aprovacao",
+        monthPosition: 4.5,
+        label: "Até 15/Mai"
+    },
+    {
+        title: "Publicação PNCP",
+        responsible: "Setor de Contratações",
+        type: "milestone",
+        colorClass: "bg-publicacao",
+        monthPosition: 4.9,
+        label: "Até 30/Mai"
+    },
+    {
+        title: "Relatórios de Riscos",
+        responsible: "Gestão",
+        type: "bar",
+        colorClass: "bg-gestao",
+        startMonth: 6,
+        duration: 6,
+        label: "Jul, Set, Nov",
+        opacity: 0.7
+    },
+    {
+        title: "Revisão e Alteração",
+        responsible: "Todas as áreas",
+        type: "bar",
+        colorClass: "bg-gestao",
+        startMonth: 8.5,
+        duration: 2,
+        label: "15/Set a 15/Nov"
+    }
+];
+
+const ganttContainer = document.getElementById('ganttRows');
+if (ganttContainer) {
+    ganttTasks.forEach(task => {
+        const row = document.createElement('div');
+        row.className = 'gantt-row';
+
+        // Info da tarefa
+        const info = document.createElement('div');
+        info.className = 'task-info';
+        info.innerHTML = `
+            <div class="task-title">${task.title}</div>
+            <div class="task-responsible">${task.responsible}</div>
+        `;
+
+        // Timeline
+        const timeline = document.createElement('div');
+        timeline.className = 'task-timeline';
+
+        if (task.type === 'bar') {
+            const bar = document.createElement('div');
+            bar.className = `gantt-bar ${task.colorClass}`;
+            
+            const leftPos = (task.startMonth / 12) * 100;
+            const width = (task.duration / 12) * 100;
+            
+            bar.style.left = `${leftPos}%`;
+            bar.style.width = `${width}%`;
+            if (task.opacity) bar.style.opacity = task.opacity;
+
+            bar.innerHTML = `
+                <span>${task.label}</span>
+                <div class="gantt-tooltip">${task.title}: ${task.label}</div>
+            `;
+            timeline.appendChild(bar);
+
+        } else if (task.type === 'milestone') {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'gantt-milestone-wrapper';
+            
+            const leftPos = (task.monthPosition / 12) * 100;
+            wrapper.style.left = `${leftPos}%`;
+
+            wrapper.innerHTML = `
+                <div class="milestone-line ${task.colorClass}"></div>
+                <div class="gantt-milestone ${task.colorClass}"></div>
+                <div class="gantt-tooltip">${task.title}: ${task.label}</div>
+            `;
+            timeline.appendChild(wrapper);
+        }
+
+        row.appendChild(info);
+        row.appendChild(timeline);
+        ganttContainer.appendChild(row);
+    });
+}
     </script>
 </body>
 </html>

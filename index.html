@@ -6,7 +6,7 @@
     <title>Manual do Portal Nacional de Compras Públicas - PNCP | IFMA</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600;700&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
             --ifma-green: #1B5E20;
@@ -22,7 +22,7 @@
         }
 
         * {
-            font-family: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
@@ -32,19 +32,21 @@
         }
 
         h1, h2, h3, h4 {
-            font-family: 'Merriweather', Georgia, serif;
             font-weight: 700;
         }
 
-        /* Header */
-        .header-main {
+        /* Hero Section */
+        .hero-section {
             background: linear-gradient(135deg, var(--ifma-green-dark) 0%, var(--ifma-green) 50%, var(--ifma-green-light) 100%);
-            padding: 3rem 0;
+            min-height: 45vh;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            padding: 3rem 0;
         }
 
-        .header-main::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: 0;
@@ -55,70 +57,75 @@
             opacity: 0.5;
         }
 
-        .header-content {
+        .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
-        .logo-ifma {
+        .hero-logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .logo-squares {
+            display: grid;
+            grid-template-columns: repeat(3, 14px);
+            gap: 4px;
         }
 
         .logo-square {
-            display: grid;
-            grid-template-columns: repeat(3, 12px);
-            gap: 3px;
+            width: 14px;
+            height: 14px;
+            border-radius: 3px;
         }
 
-        .logo-square span {
-            width: 12px;
-            height: 12px;
-            border-radius: 2px;
-        }
-
-        .logo-square span:nth-child(1) { background: var(--ifma-red); }
-        .logo-square span:nth-child(2) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(3) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(4) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(5) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(6) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(7) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(8) { background: var(--ifma-green-light); }
-        .logo-square span:nth-child(9) { background: var(--ifma-green-light); }
+        .logo-square.red { background: var(--ifma-red); }
+        .logo-square.green { background: #4CAF50; }
+        .logo-square.empty { background: transparent; }
 
         .logo-text {
             color: white;
-            font-size: 0.9rem;
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        .header-title {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .header-subtitle {
-            color: rgba(255,255,255,0.9);
+            font-weight: 700;
             font-size: 1.1rem;
-            font-weight: 300;
+            letter-spacing: 0.5px;
         }
 
-        .badge-dept {
-            background: rgba(255,255,255,0.2);
+        .logo-text span {
+            display: block;
+            font-weight: 400;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
             color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            font-weight: 400;
+            max-width: 600px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
             padding: 0.5rem 1rem;
             border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
-            backdrop-filter: blur(10px);
+            color: white;
+            font-size: 0.875rem;
+            margin-top: 1.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* Navigation/TOC */
@@ -521,8 +528,8 @@
 
         /* Responsive */
         @media (max-width: 768px) {
-            .header-title {
-                font-size: 1.8rem;
+            .hero-title {
+                font-size: 2rem;
             }
             
             .content-section {
@@ -536,14 +543,20 @@
             .video-section {
                 padding: 2rem 1.5rem;
             }
+
+            .hero-section {
+                min-height: 35vh;
+            }
         }
 
         /* Print styles */
         @media print {
-            .header-main {
+            .hero-section {
                 background: var(--ifma-green) !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                min-height: auto;
+                padding: 2rem 0;
             }
             
             .content-section {
@@ -551,11 +564,12 @@
                 page-break-inside: avoid;
             }
         }
+
         /* Gantt Chart - Cronograma PCA */
         .gantt-wrapper {
             background: white;
             border-radius: 20px;
-            box-shadow: var(--card-shadow);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
             border: 1px solid rgba(27, 94, 32, 0.08);
             overflow: hidden;
         }
@@ -864,29 +878,38 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header-main">
+    <!-- Hero Section -->
+    <section class="hero-section">
         <div class="container">
-            <div class="header-content">
-                <div class="logo-ifma">
-                    <div class="logo-square">
-                        <span></span><span></span><span></span>
-                        <span></span><span></span><span></span>
-                        <span></span><span></span><span></span>
+            <div class="hero-content">
+                <div class="hero-logo">
+                    <div class="logo-squares">
+                        <div class="logo-square red"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square green"></div>
+                        <div class="logo-square empty"></div>
                     </div>
                     <div class="logo-text">
-                        INSTITUTO<br>FEDERAL<br>Maranhão
+                        INSTITUTO FEDERAL
+                        <span>Maranhão</span>
                     </div>
                 </div>
-                <h1 class="header-title">Manual do Portal Nacional de Compras Públicas</h1>
-                <p class="header-subtitle">Guia prático para consulta do Plano de Contratações Anual (PCA) no PNCP</p>
-                <span class="badge-dept">
-                    <i class="bi bi-building me-2"></i>
+                <h1 class="hero-title">Manual do Portal Nacional de Compras Públicas</h1>
+                <p class="hero-subtitle">
+                    Guia prático para consulta do Plano de Contratações Anual (PCA) no PNCP
+                </p>
+                <div class="hero-badge">
+                    <i class="bi bi-building"></i>
                     CLC/DLC/PROAD
-                </span>
+                </div>
             </div>
         </div>
-    </header>
+    </section>
 
     <main class="container py-4">
         <!-- Table of Contents -->
@@ -904,12 +927,11 @@
                 <li><a href="#step5"><span class="toc-number">6</span> Localizar a Reitoria</a></li>
                 <li><a href="#step6"><span class="toc-number">7</span> Filtrar por Tipo de Objeto</a></li>
                 <li><a href="#step7"><span class="toc-number">8</span> Obter Informações do Termo de Referência</a></li>
-               <!-- <li><a href="#video"><span class="toc-number"><i class="bi bi-play-fill"></i></span> Vídeo Explicativo</a></li> -->
             </ul>
         </section>
 
         <!-- Cronograma -->
-        <section  id="step0" class="content-section">
+        <section id="step0" class="content-section">
             <div class="section-header">
                 <div class="step-number"><i class="bi bi-clock"></i></div>
                 <div>
@@ -967,9 +989,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </section>
-
-
 
         <!-- Introduction -->
         <section class="content-section">
@@ -1040,12 +1061,12 @@
                 </li>
             </ul>
 
-           <div class="img-placeholder text-center">
-            <br>
-    <br>
-    <img src="0tela.png" class="img-fluid mb-2" alt="Tela principal do PNCP com destaque no card PCA">
-    <p class="text-muted">Tela principal do PNCP com destaque no card "Plano de Contratações Anual - PCA".</p>
-</div>
+            <div class="img-placeholder text-center">
+                <br>
+                <br>
+                <img src="0tela.png" class="img-fluid mb-2" alt="Tela principal do PNCP com destaque no card PCA">
+                <p class="text-muted">Tela principal do PNCP com destaque no card "Plano de Contratações Anual - PCA".</p>
+            </div>
 
             <div class="alert-custom alert-tip">
                 <i class="bi bi-lightbulb"></i>
@@ -1081,11 +1102,11 @@
             </ul>
 
             <div class="img-placeholder">
-    <img src="1tela.png" class="img-fluid" alt="Tela de busca com campo Palavra-chave preenchido com IFMA" style="max-width: 100%; height: auto;">
-    <br>
-    <br>
-    <p>Tela de busca com o campo "Palavra-chave" preenchido com "IFMA".</p>
-</div>
+                <img src="1tela.png" class="img-fluid" alt="Tela de busca com campo Palavra-chave preenchido com IFMA" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Tela de busca com o campo "Palavra-chave" preenchido com "IFMA".</p>
+            </div>
 
             <div class="alert-custom alert-tip">
                 <i class="bi bi-funnel"></i>
@@ -1132,12 +1153,11 @@
             </div>
 
             <div class="img-placeholder">
-    <img src="2tela.png" class="img-fluid" alt="Lista de PCAs do IFMA para seleção de ano" style="max-width: 100%; height: auto;">
-    <br>
-    <br>
-    
-    <p>Lista de PCAs do IFMA com destaque para selecionar o ano desejado.</p>
-</div>
+                <img src="2tela.png" class="img-fluid" alt="Lista de PCAs do IFMA para seleção de ano" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Lista de PCAs do IFMA com destaque para selecionar o ano desejado.</p>
+            </div>
 
             <ul class="instruction-list">
                 <li>
@@ -1187,44 +1207,43 @@
                 </div>
             </div>
 
-             <div class="img-placeholder">
-    <img src="3tela.png" class="img-fluid" alt="Tela com campi do IFMA e gráfico de valor estimado" style="max-width: 100%; height: auto;">
-    <br>
-    <br>
-    <p>Tela apresentando os campi do IFMA com gráfico de valor estimado por categoria.</p>
-</div>
-
+            <div class="img-placeholder">
+                <img src="3tela.png" class="img-fluid" alt="Tela com campi do IFMA e gráfico de valor estimado" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Tela apresentando os campi do IFMA com gráfico de valor estimado por categoria.</p>
+            </div>
 
             <div class="alert-custom alert-tip">
-    <i class="bi bi-download"></i>
-    <div>
-        <strong>Download disponível:</strong> Utilize o botão "Baixar arquivo" para obter a relação completa de itens dos planos em formato CSV.
-        
-        <div style="margin-top: 10px;">
-            <a href="relacao_itens.csv" class="btn btn-primary btn-sm" download="relacao_itens.csv">
-                <i class="bi bi-file-earmark-arrow-down"></i> Baixar arquivo
-            </a>
-        </div>
-        </div>
-</div>
+                <i class="bi bi-download"></i>
+                <div>
+                    <strong>Download disponível:</strong> Utilize o botão "Baixar arquivo" para obter a relação completa de itens dos planos em formato CSV.
+                    
+                    <div style="margin-top: 10px;">
+                        <a href="relacao_itens.csv" class="btn btn-primary btn-sm" download="relacao_itens.csv">
+                            <i class="bi bi-file-earmark-arrow-down"></i> Baixar arquivo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Step 5 -->
-       <section id="step5" class="content-section">
-    <div class="section-header">
-        <div class="step-number">5</div>
-        <div>
-            <h2 class="section-title">Localizar a Reitoria do IFMA</h2>
-            <p class="section-description">Encontre a unidade UASG 158128</p>
-        </div>
-    </div>
+        <section id="step5" class="content-section">
+            <div class="section-header">
+                <div class="step-number">5</div>
+                <div>
+                    <h2 class="section-title">Localizar a Reitoria do IFMA</h2>
+                    <p class="section-description">Encontre a unidade UASG 158128</p>
+                </div>
+            </div>
 
-    <div class="img-placeholder">
-        <img src="5tela.png" class="img-fluid" alt="Resultado da busca mostrando a Reitoria do IFMA (UASG 158128)" style="max-width: 100%; height: auto;">
-        <br>
-    <br>
-        <p>Resultado da busca destacando a Reitoria do IFMA (UASG 158128).</p>
-    </div>
-    </section>
+            <div class="img-placeholder">
+                <img src="5tela.png" class="img-fluid" alt="Resultado da busca mostrando a Reitoria do IFMA (UASG 158128)" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Resultado da busca destacando a Reitoria do IFMA (UASG 158128).</p>
+            </div>
 
             <div class="alert-custom alert-important mb-4">
                 <i class="bi bi-exclamation-triangle"></i>
@@ -1249,11 +1268,11 @@
             </ul>
 
             <div class="img-placeholder">
-    <img src="6tela.png" class="img-fluid" alt="Lista de unidades destacando a Reitoria UASG 158128" style="max-width: 100%; height: auto;">
-    <br>
-    <br>
-    <p>Lista de unidades com destaque na linha da Reitoria (UASG 158128).</p>
-</div>
+                <img src="6tela.png" class="img-fluid" alt="Lista de unidades destacando a Reitoria UASG 158128" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Lista de unidades com destaque na linha da Reitoria (UASG 158128).</p>
+            </div>
         </section>
 
         <!-- Step 6 -->
@@ -1296,11 +1315,11 @@
             </div>
 
             <div class="img-placeholder">
-    <img src="7tela.png" class="img-fluid" alt="Tela mostrando a seção Detalhamento por Categoria e seus filtros" style="max-width: 100%; height: auto;">
-    <br>
-    <br>
-    <p>Seção "Detalhamento por Categoria" com as opções de filtro disponíveis.</p>
-</div>
+                <img src="7tela.png" class="img-fluid" alt="Tela mostrando a seção Detalhamento por Categoria e seus filtros" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Seção "Detalhamento por Categoria" com as opções de filtro disponíveis.</p>
+            </div>
         </section>
 
         <!-- Step 7 -->
@@ -1355,31 +1374,29 @@
             </div>
 
             <div class="img-placeholder">
-    <img src="8tela.png" class="img-fluid" alt="Tabela de itens do PCA destacando as colunas para o TR" style="max-width: 100%; height: auto;">
-    
-    <br>
-    <br>
-    <p>Tabela de itens do PCA com destaque nas colunas relevantes para o TR.</p>
-
-</div>
+                <img src="8tela.png" class="img-fluid" alt="Tabela de itens do PCA destacando as colunas para o TR" style="max-width: 100%; height: auto;">
+                <br>
+                <br>
+                <p>Tabela de itens do PCA com destaque nas colunas relevantes para o TR.</p>
+            </div>
 
             <div class="alert-custom alert-warning">
                 <i class="bi bi-clipboard-check"></i>
                 <div>
-                    <strong>Importante:</strong> Antes de elaborar o Termo de Referência, certifique-se de que as informações do DFD estejam vinculadas a um id de contratação. Para isso, o DFD precisa ser aprovado pelo CLC/PROAD, logo depois será gerado um id de contratação, que aparecerá no PNCP após aprovação da autoridade superior.
+                    <strong>Importante:</strong> Antes de elaborar o Termo de Referência, certifique-se de que as informações do DFD estejam vinculadas a um id de contratação. Para isso, o DFD precisa ser aprovado pelo DLC/PROAD, logo depois será gerado um id de contratação, que aparecerá no PNCP após aprovação da autoridade superior.
                 </div>
             </div>
         </section>
 
-      <!-- Contact Section -->
+        <!-- Contact Section -->
         <section class="contact-section">
             <h2 class="contact-title">Dúvidas?</h2>
-            <p class="contact-subtitle">Entre em contato com a Coordenadoria de Licitações e Compras - CLC/PROAD</p>
+            <p class="contact-subtitle">Entre em contato com a Coordenação de Licitações e Compras - CLC/PROAD</p>
             
             <div class="contact-cards">
                 <div class="contact-card">
                     <i class="bi bi-envelope"></i>
-                    <p class="mb-1">Coordenadoria de Licitações e Compras - CLC/PROAD</p>
+                    <p class="mb-1">Coordenação de Licitações e Compras - CLC/PROAD</p>
                     <a href="mailto:Licitacoes@ifma.edu.br">Licitacoes@ifma.edu.br</a>
                 </div>
                 <div class="contact-card">
@@ -1387,7 +1404,6 @@
                     <p class="mb-1">Telefone de contato</p>
                     (98) 3215-1701
                 </div>
-                
             </div>
         </section>
     </main>
@@ -1400,9 +1416,8 @@
                     <i class="bi bi-building me-2"></i>
                     Instituto Federal do Maranhão - REITORIA
                 </div>
-                
             </div>
-            <p class="mt-2"><small>Manual elaborado pela Coordenadoria de Licitaçãoes e Compras - CLC/PROAD</small></p>
+            <p class="mt-2"><small>Manual elaborado pela Coordenadoria de Licitações e Compras - CLC/PROAD</small></p>
         </div>
     </footer>
 
@@ -1432,117 +1447,117 @@
         });
 
         // ========== CRONOGRAMA PCA - GANTT CHART ==========
-const ganttTasks = [
-    {
-        title: "Envio do DFD",
-        responsible: "Áreas Técnicas",
-        type: "bar",
-        colorClass: "bg-planejamento",
-        startMonth: 0,
-        duration: 3,
-        label: "01/Jan - 01/Abr"
-    },
-    {
-        title: "Consolidação",
-        responsible: "Setor de Contratações",
-        type: "bar",
-        colorClass: "bg-consolidacao",
-        startMonth: 0,
-        duration: 4,
-        label: "01/Jan - 30/Abr"
-    },
-    {
-        title: "Aprovação",
-        responsible: "Aut. Competente",
-        type: "milestone",
-        colorClass: "bg-aprovacao",
-        monthPosition: 4.5,
-        label: "Até 15/Mai"
-    },
-    {
-        title: "Publicação PNCP",
-        responsible: "Setor de Contratações",
-        type: "milestone",
-        colorClass: "bg-publicacao",
-        monthPosition: 4.9,
-        label: "Até 30/Mai"
-    },
-    {
-        title: "Relatórios de Riscos",
-        responsible: "Gestão",
-        type: "bar",
-        colorClass: "bg-gestao",
-        startMonth: 6,
-        duration: 6,
-        label: "Jul, Set, Nov",
-        opacity: 0.7
-    },
-    {
-        title: "Revisão e Alteração",
-        responsible: "Todas as áreas",
-        type: "bar",
-        colorClass: "bg-gestao",
-        startMonth: 8.5,
-        duration: 2,
-        label: "15/Set a 15/Nov"
-    }
-];
+        const ganttTasks = [
+            {
+                title: "Envio do DFD",
+                responsible: "Áreas Técnicas",
+                type: "bar",
+                colorClass: "bg-planejamento",
+                startMonth: 0,
+                duration: 3,
+                label: "01/Jan - 01/Abr"
+            },
+            {
+                title: "Consolidação",
+                responsible: "Setor de Contratações",
+                type: "bar",
+                colorClass: "bg-consolidacao",
+                startMonth: 0,
+                duration: 4,
+                label: "01/Jan - 30/Abr"
+            },
+            {
+                title: "Aprovação",
+                responsible: "Aut. Competente",
+                type: "milestone",
+                colorClass: "bg-aprovacao",
+                monthPosition: 4.5,
+                label: "Até 15/Mai"
+            },
+            {
+                title: "Publicação PNCP",
+                responsible: "Setor de Contratações",
+                type: "milestone",
+                colorClass: "bg-publicacao",
+                monthPosition: 4.9,
+                label: "Até 30/Mai"
+            },
+            {
+                title: "Relatórios de Riscos",
+                responsible: "Gestão",
+                type: "bar",
+                colorClass: "bg-gestao",
+                startMonth: 6,
+                duration: 6,
+                label: "Jul, Set, Nov",
+                opacity: 0.7
+            },
+            {
+                title: "Revisão e Alteração",
+                responsible: "Todas as áreas",
+                type: "bar",
+                colorClass: "bg-gestao",
+                startMonth: 8.5,
+                duration: 2,
+                label: "15/Set a 15/Nov"
+            }
+        ];
 
-const ganttContainer = document.getElementById('ganttRows');
-if (ganttContainer) {
-    ganttTasks.forEach(task => {
-        const row = document.createElement('div');
-        row.className = 'gantt-row';
+        const ganttContainer = document.getElementById('ganttRows');
+        if (ganttContainer) {
+            ganttTasks.forEach(task => {
+                const row = document.createElement('div');
+                row.className = 'gantt-row';
 
-        // Info da tarefa
-        const info = document.createElement('div');
-        info.className = 'task-info';
-        info.innerHTML = `
-            <div class="task-title">${task.title}</div>
-            <div class="task-responsible">${task.responsible}</div>
-        `;
+                // Info da tarefa
+                const info = document.createElement('div');
+                info.className = 'task-info';
+                info.innerHTML = `
+                    <div class="task-title">${task.title}</div>
+                    <div class="task-responsible">${task.responsible}</div>
+                `;
 
-        // Timeline
-        const timeline = document.createElement('div');
-        timeline.className = 'task-timeline';
+                // Timeline
+                const timeline = document.createElement('div');
+                timeline.className = 'task-timeline';
 
-        if (task.type === 'bar') {
-            const bar = document.createElement('div');
-            bar.className = `gantt-bar ${task.colorClass}`;
-            
-            const leftPos = (task.startMonth / 12) * 100;
-            const width = (task.duration / 12) * 100;
-            
-            bar.style.left = `${leftPos}%`;
-            bar.style.width = `${width}%`;
-            if (task.opacity) bar.style.opacity = task.opacity;
+                if (task.type === 'bar') {
+                    const bar = document.createElement('div');
+                    bar.className = `gantt-bar ${task.colorClass}`;
+                    
+                    const leftPos = (task.startMonth / 12) * 100;
+                    const width = (task.duration / 12) * 100;
+                    
+                    bar.style.left = `${leftPos}%`;
+                    bar.style.width = `${width}%`;
+                    if (task.opacity) bar.style.opacity = task.opacity;
 
-            bar.innerHTML = `
-                <span>${task.label}</span>
-                <div class="gantt-tooltip">${task.title}: ${task.label}</div>
-            `;
-            timeline.appendChild(bar);
+                    bar.innerHTML = `
+                        <span>${task.label}</span>
+                        <div class="gantt-tooltip">${task.title}: ${task.label}</div>
+                    `;
+                    timeline.appendChild(bar);
 
-        } else if (task.type === 'milestone') {
-            const wrapper = document.createElement('div');
-            wrapper.className = 'gantt-milestone-wrapper';
-            
-            const leftPos = (task.monthPosition / 12) * 100;
-            wrapper.style.left = `${leftPos}%`;
+                } else if (task.type === 'milestone') {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'gantt-milestone-wrapper';
+                    
+                    const leftPos = (task.monthPosition / 12) * 100;
+                    wrapper.style.left = `${leftPos}%`;
 
-            wrapper.innerHTML = `
-                <div class="milestone-line ${task.colorClass}"></div>
-                <div class="gantt-milestone ${task.colorClass}"></div>
-                <div class="gantt-tooltip">${task.title}: ${task.label}</div>
-            `;
-            timeline.appendChild(wrapper);
+                    wrapper.innerHTML = `
+                        <div class="milestone-line ${task.colorClass}"></div>
+                        <div class="gantt-milestone ${task.colorClass}"></div>
+                        <div class="gantt-tooltip">${task.title}: ${task.label}</div>
+                    `;
+                    timeline.appendChild(wrapper);
+                }
+
+                row.appendChild(info);
+                row.appendChild(timeline);
+                ganttContainer.appendChild(row);
+            });
         }
-
-        row.appendChild(info);
-        row.appendChild(timeline);
-        ganttContainer.appendChild(row);
-    });
-}
     </script>
 </body>
 </html>
